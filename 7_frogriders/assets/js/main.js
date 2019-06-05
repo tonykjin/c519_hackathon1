@@ -6,7 +6,7 @@ function startApp() {
     gameBoard.gameLoad(9);
     var frogLocation = new frog('.gameSquare');
     var createFrogs = new frog();
-    createFrogs.createFrogs(2);
+    createFrogs.frogIndex();
     
 }
 class renderLoad {
@@ -27,12 +27,23 @@ class frog {
         this.indexLocation.click(this.frogIndex);
     }
     createFrogs(frogCount) { //tony
-        for (var i = 0; i <= frogCount; i++) {
-            this.makeFrog = $('<div>').addClass('frogImg');
-            $('.' + i).append(this.makeFrog);
-        }
+        this.makeFrog = $('<div>').addClass('frogImg');
+        $('.' + frogCount).append(this.makeFrog);
     }
     frogIndex() { //dwight
+        var frogArray = [[1,1,1],[1,0,1],[1,1,1]];
+        var createFrogsIndex = 0;
+        for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < frogArray.length; frogArrayIndexOuter++){
+            for (var frogArrayIndexInner = 0; frogArrayIndexInner < frogArray[frogArrayIndexOuter].length; frogArrayIndexInner++){
+                createFrogsIndex++;
+                if (frogArray[frogArrayIndexOuter][frogArrayIndexInner] === 1){
+                    this.createFrogs(createFrogsIndex);
+                    //display frog
+                }else{
+                    //don't
+                }
+            }
+        }
 
     }
     moveIndex() { //bisham
