@@ -31,7 +31,9 @@ class frog {
         $('.' + frogCount).append(this.makeFrog);
     }
     frogIndex() { //dwight
-        var frogArray = [[1,1,1],[1,0,1],[1,1,1]];
+        var frogArray = [[1,1,1],
+                         [1,0,1],
+                         [1,1,1]];
         var createFrogsIndex = 0;
         for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < frogArray.length; frogArrayIndexOuter++){
             for (var frogArrayIndexInner = 0; frogArrayIndexInner < frogArray[frogArrayIndexOuter].length; frogArrayIndexInner++){
@@ -46,7 +48,13 @@ class frog {
         }
 
     }
-    moveIndex() { //bisham
+}
 
+class gameBoard {
+    constructor() {
+
+    }
+    moveIndex() {
+        
     }
 }
