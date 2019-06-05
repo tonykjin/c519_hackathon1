@@ -1,0 +1,8 @@
+.frog {
+    background-image: url(frog1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+}
