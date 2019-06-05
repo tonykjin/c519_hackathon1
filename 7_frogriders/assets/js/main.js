@@ -1,23 +1,26 @@
 $(document).ready(startApp);
 
-var frogInit = null;
 
 function startApp() {
-    frogInit = new gameBasics(2, '<div>');
-    $('body').append(frogInit);
+    var frogLocation = new frog('.gameSquare');
+    
 }
 
-class gameBasics {
-    constructor(frogNumber, frogLocation) {
-        debugger;
-        this.location = frogLocation;
-        this.testFrogs = null;
-        this.createFrogs = this.createFrogs.bind(this);
-        this.createFrogs(frogNumber);
+class frog {
+    constructor(targetSquare) {
+       this.indexLocation = $(targetSquare); 
+    
+    }   
+    addEventListeners() {
+        this.indexLocation.click(this.frogIndex);
     }
-    createFrogs() {
-        debugger;
-        this.location = $(this.location).text("testing123");
-        return this.location;
+    createFrogs() { //tony
+
+    }
+    frogIndex() { //dwight
+
+    }
+    moveIndex() { //bisham
+
     }
 }
