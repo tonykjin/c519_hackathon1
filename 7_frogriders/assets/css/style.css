@@ -43,6 +43,7 @@ body {
 }
 
 .lilyPad {
+    display: inline-block;
     background-image: url("lilyPad.jpg");
     background-size: contain;
     background-repeat: no-repeat;
