@@ -2,11 +2,16 @@ class Gameboard {
     newFrog = new Frog();
 
     constructor() {
-        this.removeFrogs = this.removeFrogs.bind(this);
+        this.checkMoves = this.checkMoves.bind(this);
         this.passClickID = this.passClickID.bind(this);
         this.w = null;
         this.v = null;
         this.moveIndex = this.moveIndex.bind(this);
+        this.frogArray = [[1,1,1,1,1],
+                          [1,1,1,1,1],
+                          [1,1,0,1,1],
+                          [1,1,1,1,1],
+                          [1,1,1,1,1]];
     }
     addEventListeners() {
 
@@ -14,13 +19,11 @@ class Gameboard {
     }
 
     passClickID(event){
-        this.removeFrogs($(event.currentTarget).attr('id'));
+        this.checkMoves($(event.currentTarget).attr('id'));
+        this.frogIndex();
     }
 
     frogIndex() { 
-        this.frogArray = [[1,1,1],
-                          [1,0,1],
-                          [1,1,1]];
         var createFrogsIndex = 0;
         for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogArray.length; frogArrayIndexOuter++){
             for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogArray[frogArrayIndexOuter].length; frogArrayIndexInner++){
@@ -41,7 +44,6 @@ class Gameboard {
 
 
         if (this.frogArray[i][x] !== 0) {
-            debugger;
             if (this.frogArray[i + 1] !== undefined && this.frogArray[i + 2] !== undefined){
                 if (this.frogArray[i + 1][x] === 1 && this.frogArray[i + 2][x] === 0) {
                     w = i+ 2;
@@ -69,7 +71,7 @@ class Gameboard {
             }
         }
     }
-    removeFrogs(id) {
+    checkMoves(id) {
         //square of frog to move = [w][v]
        //square to move selected to = [i][x]
        //square of frog to remove = [(w+x)/2][(v+y)/2]
@@ -79,11 +81,20 @@ class Gameboard {
         var y = id.split('-')[0];
         var x = id.split('-')[1];
 
-        var w = this.moveIndex(y,x)[0];
-        var v = this.moveIndex(y,x)[1];
-        var x = this.moveIndex(y,x)[2];
-        var i = this.moveIndex(y,x)[3];
+        var w = parseInt(this.moveIndex(y,x)[0]);
+        var v = parseInt(this.moveIndex(y,x)[1]);
+        var x = parseInt(this.moveIndex(y,x)[2]);
+        var i = parseInt(this.moveIndex(y,x)[3]);
 
-        Frog.frogArray[(w+x)/2][(v+y)/2].splice(0,1,0);
+        var targetX= [(v+i)/2];
+        var targetY = [(w+x)/2];
+
+        this.frogArray[targetY].splice(targetX ,1,0);
+        this.removeFrogs(targetY, targetX);
+        debugger;
+    }
+
+    removeFrogs(targetY, targetX){
+
     }
 }
