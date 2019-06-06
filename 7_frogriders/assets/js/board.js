@@ -5,8 +5,14 @@ class Gameboard {
         this.checkMoves = this.checkMoves.bind(this);
         this.passClickID = this.passClickID.bind(this);
         this.removeFrogs = this.removeFrogs.bind(this);
+        this.x = null;
+        this.y = null;
         this.w = null;
         this.v = null;
+        this.firstClick = null;
+        this.firstClick = this.firstClick.bind(this);
+        this.secondClick = null;
+        this.secondClick = this.secondClick.bind(this);
         this.frogArray = [[1,1,1,1,1],
                           [1,1,1,1,1],
                           [1,1,0,1,1],
@@ -18,8 +24,18 @@ class Gameboard {
         $('.gameSquare').click(this.passClickID);
     }
 
-    passClickID(event){
-        this.checkMoves($(event.currentTarget).attr('id'));
+    passClickID(event) {
+        debugger;
+
+        if (this.firstClick !== null){
+            this.secondClick = $(event.currentTarget).attr('id');
+            this.secondClickFunction(this.secondClick);
+        }
+        if (this.firstClick === null) {
+            this.firstClick = $(event.currentTarget).attr('id');
+            this.checkMoves(this.firstClick);
+        }
+
     }
 
     frogIndex() {
@@ -75,32 +91,32 @@ class Gameboard {
         }
     }
     checkMoves(id) {
-        //square of frog to move = [w][v]
-       //square to move selected to = [i][x]
-       //square of frog to remove = [(w+x)/2][(v+y)/2]
-       //use .splice to change array[(w+x)/2][(v+y)/2] from 1 to 0
-       //add to points by 1
-        console.log(id);
+        this.y = parseInt(id.split('-')[0]);
+        this.x = parseInt(id.split('-')[1]);
+
+    }
+
+    secondClickFunction(id){
         var y = parseInt(id.split('-')[0]);
         var x = parseInt(id.split('-')[1]);
 
-        var checkMovesArray = this.moveIndex(y,x);
+        var validMovesArray = this.moveIndex(y,x);
 
-        var v = checkMovesArray[0];
-        var w = checkMovesArray[1];
-        x = checkMovesArray[2];
-        y = checkMovesArray[3];
+        var v = validMovesArray[0];
+        var w = validMovesArray[1];
+        x = validMovesArray[2];
+        y = validMovesArray[3];
 
-        var targetY= [(v+y)/2];
+        var targetY = [(v+y)/2];
         var targetX = [(w+x)/2];
-        debugger;
 
-        this.frogArray[targetY].splice(targetX ,1,0);
-        this.removeFrogs(targetY, targetX);
+        if (this.secondClick === this.frogArray[targetY][targetX]){
+            this.removeFrogs(targetY, targetX);
+        }
     }
 
     removeFrogs(targetY, targetX){
-        console.log($('#' + targetY + '-' + targetX + ' .frogImg'));
+        this.frogArray[targetY].splice(targetX ,1,0);
         $('#' + targetY + '-' + targetX + ' .frogImg').hide();
     }
 }
