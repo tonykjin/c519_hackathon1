@@ -2,20 +2,24 @@ class Gameboard {
     newFrog = new Frog();
 
     constructor() {
+        this.removeFrogs = this.removeFrogs.bind(this);
 
         this.w = null;
         this.v = null;
         this.moveIndex = this.moveIndex.bind(this);
+        this.passClickID = this.passClickID.bind(this);
     }
     addEventListeners() {
-        this.removeFrogs = this.removeFrogs.bind(this);
 
-        $('.gameSquare').click(function(event) {
-            debugger;
-
-            this.removeFrogs($(event.currentTarget).attr('id'));
-        });
+        $('.gameSquare').click(this.passClickID(event));
     }
+
+    passClickID(event){
+        debugger;
+
+        this.removeFrogs($(event.currentTarget).attr('id'));
+    }
+
     frogIndex() { 
         this.frogArray = [[1,1,1],
                           [1,0,1],
