@@ -1,7 +1,7 @@
 $(document).ready(startApp);
-
+var newGameBoard
 function startApp() {
-    var newGameBoard = new Gameboard();
+    newGameBoard = new Gameboard();
     newGameBoard.addEventListeners();
     newGameBoard.frogIndex();
 }
