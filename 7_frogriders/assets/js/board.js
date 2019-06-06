@@ -39,24 +39,33 @@ class Gameboard {
         var w = null;
         var v = null;
 
+
         if (this.frogArray[i][x] !== 0) {
             debugger;
-            if (this.frogArray[i + 1][ x] === 1 && this.frogArray[i + 2][ x] === 0) {
-                w = i+ 2;
-                v = x;
-                return [w, v, x, i]
-            } else if (this.frogArray[i - 1][ x] === 1 && this.frogArray[i-2][ x] === 0) {
-                w = i - 2;
-                v = x;
-                return [w, v, x, i]
-            } else if (this.frogArray[i][ x+1] === 1 && this.frogArray[i][ x+2] === 0) {
-                w = i;
-                v = x+2;
-                return [w, v, x, i]
-            } else if (this.frogArray[i][ x-1] === 1 && this.frogArray[i][ x-2] === 0) {
-                w = i;
-                v = x-2;
-                return [w, v, x, i]
+            if (this.frogArray[i + 1] !== undefined && this.frogArray[i + 2] !== undefined){
+                if (this.frogArray[i + 1][x] === 1 && this.frogArray[i + 2][x] === 0) {
+                    w = i+ 2;
+                    v = x;
+                    return [w, v, x, i]
+                }
+            } else if (this.frogArray[i - 1] !== undefined && this.frogArray[i-2] !== undefined){
+                 if (this.frogArray[i - 1][x] === 1 && this.frogArray[i-2][x] === 0) {
+                    w = i - 2;
+                    v = x;
+                    return [w, v, x, i]
+                }
+            }else if (this.frogArray[i][x+1] !== undefined && this.frogArray[i][x+2] !== undefined){
+                if (this.frogArray[i][x+1] === 1 && this.frogArray[i][ x+2] === 0) {
+                    w = i;
+                    v = x + 2;
+                    return [w, v, x, i]
+                }
+            }else if (this.frogArray[i][x-1] !== undefined && this.frogArray[i][x-2] !== undefined){
+                if (this.frogArray[i][x-1] === 1 && this.frogArray[i][x-2] === 0) {
+                    w = i;
+                    v = x-2;
+                    return [w, v, x, i]
+                }
             }
         }
     }
@@ -67,7 +76,6 @@ class Gameboard {
        //use .splice to change array[(w+x)/2][(v+y)/2] from 1 to 0
        //add to points by 1
         console.log(id);
-        debugger;
         var y = id.split('-')[0];
         var x = id.split('-')[1];
 
