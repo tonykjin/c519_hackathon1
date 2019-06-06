@@ -4,9 +4,10 @@ $(document).ready(startApp);
 function startApp() {
     var newGame = new renderLoad();
     newGame.gameLoad(9);
-    var frogLocation = new frog($('.gameContainer').on('click','div') );
-    var board = new gameBoard();
+    var frogLocation = new frog();
     var createFrogs = new frog();
+    frogLocation.addEventListeners();
+    var board = new gameBoard();
     createFrogs.frogIndex();
     
 }
@@ -28,18 +29,26 @@ class renderLoad {
 
 
 class frog {
-    constructor(targetSquare) {
-        this.indexLocation = $(targetSquare); 
+    constructor() {
         this.makeFrog = null;
+        this.frogIndex = this.frogIndex.bind(this);
+        this.removeFrogs = this.removeFrogs.bind(this);
     }   
     addEventListeners() {
-        this.indexLocation.click(this.frogIndex);
+        $('.gameSquare').click(this.removeFrogs());
+            var y = $(this).attr('id').split('-')[0];
+            var x = $(this).attr('id').split('-')[1];
+            return [y,x];
     }
     createFrogs(frogCount) { //tony
+        console.log('createFrogs');
         this.makeFrog = $('<div>').addClass('frogImg');
         $('.' + frogCount).append(this.makeFrog);
     }
     frogIndex() { //dwight
+        // debugger;
+        console.log('click');
+
         this.frogArray = [[1,1,1],
                           [1,0,1],
                           [1,1,1]];
@@ -57,7 +66,7 @@ class frog {
         }
 
     }
-    removeFrogs() {
+    removeFrogs(y,x) {
         //square of frog to move = [w][v]
        //square to move selected to = [i][x]
        //square of frog to remove = [(w+x)/2][(v+y)/2]
