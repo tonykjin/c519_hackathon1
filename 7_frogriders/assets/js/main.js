@@ -2,9 +2,10 @@ $(document).ready(startApp);
 
 
 function startApp() {
-    var gameBoard = new renderLoad();
-    gameBoard.gameLoad(9);
+    var newGame = new renderLoad();
+    newGame.gameLoad(9);
     var frogLocation = new frog('.gameSquare');
+    var board = new gameBoard();
     var createFrogs = new frog();
     createFrogs.frogIndex();
     
@@ -59,22 +60,27 @@ class frog {
 
 class gameBoard {
     constructor() {
-
+        this.w = null;
+        this.v = null;
     }
-    moveIndex() {
+    moveIndex(i, x) {
         if (frog.frogArray[i, x] !== 0) {
             if (frog.frogArray[i + 1, x] === 1 && frog.frogArray[i + 2, x] === 0) {
-                var w = i+ 2;
-                var v = x;
+                w = i+ 2;
+                v = x;
+                return [w, v]
             } else if (frog.frogArray[i - 1, x] === 1 && frog.frogArray[i-2, x] === 0) {
-                var w = i - 2;
-                var v = x;
+                w = i - 2;
+                v = x;
+                return [w, v]
             } else if (frog.frogArray[i, x+1] === 1 && frog.frogArray[i, x+2] === 0) {
-                var w = i;
-                var v = x+2;
+                w = i;
+                v = x+2;
+                return [w, v]
             } else if (frog.frogArray[i, x-1] === 1 && frog.frogArray[i, x-2] === 0) {
-                var w = i;
-                var v = x-2;
+                w = i;
+                v = x-2;
+                return [w, v]
             }
         }
     }
