@@ -3,20 +3,18 @@ class Gameboard {
 
     constructor() {
         this.removeFrogs = this.removeFrogs.bind(this);
-
+        this.passClickID = this.passClickID.bind(this);
         this.w = null;
         this.v = null;
         this.moveIndex = this.moveIndex.bind(this);
-        this.passClickID = this.passClickID.bind(this);
     }
     addEventListeners() {
 
-        $('.gameSquare').click(this.passClickID(event));
+        $('.gameSquare').click(this.passClickID);
     }
 
     passClickID(event){
         debugger;
-
         this.removeFrogs($(event.currentTarget).attr('id'));
     }
 
