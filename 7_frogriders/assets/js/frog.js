@@ -2,12 +2,14 @@ class Frog {
     constructor() {
         this.makeFrog = null;
         this.frogIndex = this.frogIndex.bind(this);
+        this.gameArea = new Gameboard();
+        this.gameArea = this.gameArea.bind(this);
     }   
     addEventListeners() {
         $('.gameSquare').click(gameArea.removeFrogs());
-            var y = $(this).attr('id').split('-')[0];
-            var x = $(this).attr('id').split('-')[1];
-            return [y,x];
+        var y = $(this).attr('id').split('-')[0];
+        var x = $(this).attr('id').split('-')[1];
+        return [y,x];
     }
     createFrogs(frogCount) {
         console.log('createFrogs');
