@@ -10,13 +10,11 @@ class Gameboard {
         this.passClickID = this.passClickID.bind(this);
     }
     addEventListeners() {
-
-        $('.gameSquare').click(this.passClickID(event));
-    }
+        $('.gameSquare').click(this.passClickID);
+    }   
 
     passClickID(event){
         debugger;
-
         this.removeFrogs($(event.currentTarget).attr('id'));
     }
 
@@ -39,22 +37,21 @@ class Gameboard {
 
     }
     moveIndex(i, x) {
-        console.log(this.newFrog);
-        if (this.newFrog.frogIndex[i, x] !== 0) {
+        if (this.frogIndex[i, x] !== 0) {
             debugger;
-            if (this.newFrog.frogIndex[i + 1, x] === 1 && this.newFrog.frogIndex[i + 2, x] === 0) {
+            if (this.frogIndex[i + 1, x] === 1 && this.frogIndex[i + 2, x] === 0) {
                 w = i+ 2;
                 v = x;
                 return [w, v, x, i]
-            } else if (this.newFrog.frogIndex[i - 1, x] === 1 && this.newFrog.frogIndex[i-2, x] === 0) {
+            } else if (this.frogIndex[i - 1, x] === 1 && this.frogIndex[i-2, x] === 0) {
                 w = i - 2;
                 v = x;
                 return [w, v, x, i]
-            } else if (this.newFrog.frogIndex[i, x+1] === 1 && this.newFrog.frogIndex[i, x+2] === 0) {
+            } else if (this.frogIndex[i, x+1] === 1 && this.frogIndex[i, x+2] === 0) {
                 w = i;
                 v = x+2;
                 return [w, v, x, i]
-            } else if (this.newFrog.frogIndex[i, x-1] === 1 && this.newFrog.frogIndex[i, x-2] === 0) {
+            } else if (this.frogIndex[i, x-1] === 1 && this.frogIndex[i, x-2] === 0) {
                 w = i;
                 v = x-2;
                 return [w, v, x, i]
@@ -75,7 +72,7 @@ class Gameboard {
         var v = this.moveIndex(y,x)[1];
         var x = this.moveIndex(y,x)[2];
         var i = this.moveIndex(y,x)[3];
-
+        //add second click handler 
         Frog.frogArray[(w+x)/2][(v+y)/2].splice(0,1,0);
     }
 }
