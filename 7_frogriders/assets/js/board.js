@@ -4,7 +4,30 @@ class Gameboard {
         this.v = null;
         this.moveIndex = this.moveIndex.bind(this);
         this.removeFrogs = this.removeFrogs.bind(this);
-        this.newFrog = new Frog();
+    }
+    addEventListeners() {
+        $('.gameSquare').click(this.gameArea.removeFrogs($(event.currentTarget).attr('id'), $));
+        var y = $(this).attr('id').split('-')[0];
+        var x = $(this).attr('id').split('-')[1];
+        return [y,x];
+    }
+    frogIndex() { 
+        this.frogArray = [[1,1,1],
+                          [1,0,1],
+                          [1,1,1]];
+        var createFrogsIndex = 0;
+        for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogArray.length; frogArrayIndexOuter++){
+            for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogArray[frogArrayIndexOuter].length; frogArrayIndexInner++){
+                createFrogsIndex++;
+                if (this.frogArray[frogArrayIndexOuter][frogArrayIndexInner] === 1){
+                    this.createFrogs(createFrogsIndex);
+                    //display frog
+                }else{
+                    //don't
+                }
+            }
+        }
+
     }
     moveIndex(i, x) {
         console.log(this.newFrog);
@@ -41,9 +64,5 @@ class Gameboard {
         var i = this.moveIndex(y,x)[3];
 
         Frog.frogArray[(w+x)/2][(v+y)/2].splice(0,1,0);
-
-
-
-
     }
 }
