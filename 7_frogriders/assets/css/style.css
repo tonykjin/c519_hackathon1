@@ -1,40 +1,101 @@
-
 body {
-    height: 100vh;
-    width: 100vw;
-    background-color: white;
+    background-image: url('shrekSwamp.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 97vh;
+    color: darkgray;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.gameTitle{
+    display: flex;
+    border: 2px solid #303d2b;
+    height: 15%;;
+    margin-bottom: .5%;
+}
+.gameTitle > * {
+    width: 33%;
+    text-align: center;
+    margin: auto;
+}
+
+.titleImg {
+    background-image: url('oie_transparent.png');
+    background-size: contain;
+    height: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+    
+.mainGameDisplay {
+    height: 65%;
+    display: flex;
+}
+
+.mainGameDisplay > * {
+    display: inline-block;
+    height: 80%;
+}
+
+.playerDiv {
+    vertical-align: top;
+    text-align: center;
+    height: 98%;
+    width: 15%;
+    border: #303d2b solid 2px;
+}
+
+.playerDiv h2{
+    height: 7%;
+}
+
+.frogCount {
+    height: 80%;
+}
+
+.cappedFrogDisplay {
+    border: #303d2b solid 2px;
+    width: 70%;
+    height: 75%;
+    margin: 20% auto;
+}
+
+.pondContainer {
+    width: 68%;
+    height: 98%;
+    position: relative;
+    border: #303d2b solid 2px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
 }
 
 .gameContainer {
-    width: 45%;
-    height: 75%;
-    position: relative;
-    background-color: white;
-    border: black solid 1px;
-    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .gameSquare {
-    background-color: gray;
     width: 31%;
     height: 31%;
-    display: inline-block;
-    border: solid 1px gray;
-    margin-left: 1%;
-    margin-top: .5%;
     position: relative;
-    /* margin-left: 1.3%;
-    margin-top: 1%;  */
+    margin-top: .33%;
+    background-image: url("realLily.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .frogImg {
-    background-image: url('frog1.png');
-    background-size: contain;
+    background-image: url('transparentFrog.png');
+    background-size: 40%;
     background-repeat: no-repeat;
-    display: inline-block;
     height: 100%;
     width: 100%;
     position: absolute;
+    background-position: center;
 }
 
 .Middle {
@@ -42,13 +103,27 @@ body {
 
 }
 
-.lilyPad {
-    display: inline-block;
-    background-image: url("lilyPad.jpg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-
+.village {
+    border: #303d2b 2px solid;
+    height: 15%;
 }
+
+button {
+    padding: 10px 15px;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    color: darkgray;
+    background-color: #65733E;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 3px #999;
+  }
+  
+  button:hover {background-color: #9e2121}
+  
+  button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
