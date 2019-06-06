@@ -86,8 +86,8 @@ class Gameboard {
 
         var checkMovesArray = this.moveIndex(y,x);
 
-        var w = checkMovesArray[0];
-        var v = checkMovesArray[1];
+        var v = checkMovesArray[0];
+        var w = checkMovesArray[1];
         x = checkMovesArray[2];
         y = checkMovesArray[3];
 
