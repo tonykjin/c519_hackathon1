@@ -3,7 +3,7 @@ class Frog {
         this.makeFrog = null;
     }
     createFrogs(frogCount) {
-        console.log('createFrogs');
+        debugger;
         this.makeFrog = $('<div>').addClass('frogImg');
         $('.' + frogCount).append(this.makeFrog);
     }

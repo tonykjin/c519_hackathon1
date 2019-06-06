@@ -26,7 +26,7 @@ class Gameboard {
             for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogArray[frogArrayIndexOuter].length; frogArrayIndexInner++){
                 createFrogsIndex++;
                 if (this.frogArray[frogArrayIndexOuter][frogArrayIndexInner] === 1){
-                    this.newFrog.createFrogs;
+                    this.newFrog.createFrogs(createFrogsIndex);
                     //display frog
                 }else{
                     //don't
