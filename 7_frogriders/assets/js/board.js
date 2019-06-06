@@ -1,7 +1,8 @@
 class Gameboard {
-    newFrog = new Frog();
+    
 
     constructor() {
+        this.newFrog = new Frog(); 
         this.checkMoves = this.checkMoves.bind(this);
         this.passClickID = this.passClickID.bind(this);
         this.removeFrogs = this.removeFrogs.bind(this);
@@ -10,7 +11,6 @@ class Gameboard {
         this.w = null;
         this.v = null;
         this.firstClick = null;
-        this.firstClick = this.firstClick.bind(this);
         this.secondClick = null;
         this.secondClick = this.secondClick.bind(this);
         this.frogArray = [[1,1,1,1,1],
@@ -53,14 +53,38 @@ class Gameboard {
         }
 
     }
+    getValueFromPosition(x, y) {
+        if(this.frogArray[y] === undefined) {
+            return false;
+        }
+        if (this.frogArray[y][x] === undefined){
+            return false;
+        }
+        return this.frogArray[y][x];
+    }
     moveIndex(y, x) {
         y = parseInt(y);
         x = parseInt(x);
 
         var w = null;
         var v = null;
-
-
+        var vectors = [
+            {x:0, y:2},
+            {x:0, y:-2},
+            {x:2, y:0},
+            {x:-2, y:0},
+        ]
+        for (var vectorIndex = 0; vectorIndex < vector.length; vectorIndex++){
+            var currentVector = vectors[vectorIndex];
+            var nextSpot = {
+                x: x + currentVector.x,
+                y: y + currentVector.y
+            }
+            var destinationSquare = this.getValueFromPosition(nextSpot.x, nextSpot.y);
+            if (destinationSquare === 0) {
+                return [currentVector.y, currentVector.x, x, y];
+            }
+        }
         if (this.frogArray[y][x] !== 0) {
 
             if (this.frogArray[y + 2] !== undefined){
