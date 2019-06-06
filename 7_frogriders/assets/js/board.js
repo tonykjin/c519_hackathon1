@@ -39,34 +39,39 @@ class Gameboard {
 
     }
     moveIndex(i, x) {
+        i = parseInt(i);
+        x = parseInt(x);
+
         var w = null;
         var v = null;
 
 
         if (this.frogArray[i][x] !== 0) {
-            if (this.frogArray[i + 1] !== undefined && this.frogArray[i + 2] !== undefined){
+            debugger;
+
+            if (this.frogArray[i + 2] !== undefined){
                 if (this.frogArray[i + 1][x] === 1 && this.frogArray[i + 2][x] === 0) {
                     w = i+ 2;
                     v = x;
-                    return [w, v, x, i]
+                    return [w, v, x, i];
                 }
-            } else if (this.frogArray[i - 1] !== undefined && this.frogArray[i-2] !== undefined){
+            }  if (this.frogArray[i-2] !== undefined){
                  if (this.frogArray[i - 1][x] === 1 && this.frogArray[i-2][x] === 0) {
                     w = i - 2;
                     v = x;
-                    return [w, v, x, i]
+                    return [w, v, x, i];
                 }
-            }else if (this.frogArray[i][x+1] !== undefined && this.frogArray[i][x+2] !== undefined){
-                if (this.frogArray[i][x+1] === 1 && this.frogArray[i][ x+2] === 0) {
+            } if (this.frogArray[i][x+2] !== undefined){
+                if (this.frogArray[i][x+1] === 1 && this.frogArray[i][x+2] === 0) {
                     w = i;
                     v = x + 2;
-                    return [w, v, x, i]
+                    return [w, v, x, i];
                 }
-            }else if (this.frogArray[i][x-1] !== undefined && this.frogArray[i][x-2] !== undefined){
+            } if (this.frogArray[i][x-2] !== undefined){
                 if (this.frogArray[i][x-1] === 1 && this.frogArray[i][x-2] === 0) {
                     w = i;
                     v = x-2;
-                    return [w, v, x, i]
+                    return [w, v, x, i];
                 }
             }
         }
@@ -78,23 +83,22 @@ class Gameboard {
        //use .splice to change array[(w+x)/2][(v+y)/2] from 1 to 0
        //add to points by 1
         console.log(id);
-        var y = id.split('-')[0];
-        var x = id.split('-')[1];
+        var y = parseInt(id.split('-')[0]);
+        var x = parseInt(id.split('-')[1]);
 
         var w = parseInt(this.moveIndex(y,x)[0]);
         var v = parseInt(this.moveIndex(y,x)[1]);
         var x = parseInt(this.moveIndex(y,x)[2]);
         var i = parseInt(this.moveIndex(y,x)[3]);
 
-        var targetX= [(v+i)/2];
-        var targetY = [(w+x)/2];
+        var targetY= [(v+i)/2];
+        var targetX = [(w+x)/2];
 
         this.frogArray[targetY].splice(targetX ,1,0);
         this.removeFrogs(targetY, targetX);
-        debugger;
     }
 
     removeFrogs(targetY, targetX){
-
+        $('#' + targetY + '-' + targetX + ' .frogImg').hide();
     }
 }
