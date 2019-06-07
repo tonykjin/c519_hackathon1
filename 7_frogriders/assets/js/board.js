@@ -27,13 +27,10 @@ class Gameboard {
     }
 
     passClickID(event) {
-
-
         if (this.firstClick !== undefined){
             this.secondClick = $(event.currentTarget).attr('id');
             this.secondClickFunction(this.secondClick);
-        }
-        if (this.firstClick === undefined) {
+        }else if(this.firstClick === undefined) {
             this.firstClick = $(event.currentTarget).attr('id');
             this.firstClickFunction(this.firstClick);
         }
@@ -75,46 +72,77 @@ class Gameboard {
 
 
             if (y === this.y + 2 && x === this.x){
-                if (this.frogArray[this.y + 1][x] === 1) {
+                if (this.frogArray[this.y + 1][this.x] === 1) {
                     $('#' + this.y + '-' + this.x + ' .frogImg').hide();
+                    this.removeFrogs(this.y, this.x);
+
                     $('#' + (this.y+1) + '-' + this.x + ' .frogImg').hide();
+                    this.removeFrogs(this.y + 1, this.x);
+
                     $('#' + y + '-' + x).append($('<div>').addClass('frogImg'));
-                    this.removeFrogs(y, x);
+                    this.addFrog(y, x);
+
+                    this.firstClick = undefined;
+                    this.secondClick = undefined;
                 }
             }  if (y === this.y - 2 && x === this.x){
-                 if (this.frogArray[this.y - 1][x] === 1) {
+                 if (this.frogArray[this.y - 1][this.x] === 1) {
                      $('#' + this.y + '-' + this.x + ' .frogImg').hide();
+                     this.removeFrogs(this.y, x);
+
                      $('#' + (this.y-1) + '-' + this.x + ' .frogImg').hide();
+                     this.removeFrogs(this.y-1, this.x);
+
                      $('#' + y + '-' + x).append($('<div>').addClass('frogImg'));
-                     this.removeFrogs(y, x);
+                     this.addFrog(y, x);
+
+                     this.firstClick = undefined;
+                     this.secondClick = undefined;
                 }
             } if (y === this.y && x === this.x + 2){
-                if (this.frogArray[y][x+1] === 1) {
+                if (this.frogArray[this.y][this.x+1] === 1) {
                     $('#' + this.y + '-' + this.x + ' .frogImg').hide();
+                    this.removeFrogs(this.y, this.x);
+
                     $('#' + (this.y) + '-' + (this.x+1) + ' .frogImg').hide();
+                    this.removeFrogs(this.y, this.x+1);
+
                     $('#' + y + '-' + x).append($('<div>').addClass('frogImg'));
-                    this.removeFrogs(y, x);
+                    this.addFrog(y, x);
+
+                    this.firstClick = undefined;
+                    this.secondClick = undefined;
                 }
             } if (y === this.y && x === this.x - 2){
-                if (this.frogArray[y][x-1] === 1) {
+                if (this.frogArray[this.y][this.x-1] === 1) {
                     $('#' + this.y + '-' + this.x + ' .frogImg').hide();
-                    $('#' + (this.y+1) + '-' + (this.x-1) + ' .frogImg').hide();
+                    this.removeFrogs(this.y, this.x);
+
+                    $('#' + (this.y) + '-' + (this.x-1) + ' .frogImg').hide();
+                    this.removeFrogs(this.y, this.x-1);
+
                     $('#' + y + '-' + x).append($('<div>').addClass('frogImg'));
-                    this.removeFrogs(y, x);
+                    this.addFrog(y, x);
+                    this.firstClick = undefined;
+                    this.secondClick = undefined;
                 }
+            } else {
+                this.firstClick = undefined;
+                this.secondClick = undefined;
             }
-            this.firstClick = undefined;
-            this.secondClick = undefined;
+
         }
     }
     firstClickFunction(id) {
+        console.log(this.frogArray);
+
         this.y = parseInt(id.split('-')[0]);
         this.x = parseInt(id.split('-')[1]);
 
     }
 
     secondClickFunction(id){
-        console.log('second click function');
+        console.log(this.frogArray);
         var y = parseInt(id.split('-')[0]);
         var x = parseInt(id.split('-')[1]);
 
@@ -123,5 +151,10 @@ class Gameboard {
 
     removeFrogs(targetY, targetX){
         this.frogArray[targetY].splice(targetX ,1,0);
+
+    }
+
+    addFrog(targetY, targetX){
+        this.frogArray[targetY].splice(targetX ,1,1);
     }
 }
