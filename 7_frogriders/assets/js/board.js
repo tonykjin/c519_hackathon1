@@ -4,7 +4,7 @@ class Gameboard {
     constructor() {
 
         this.firstClickFunction = this.firstClickFunction.bind(this);
-
+        this.renderFrog = new Frog();
         this.passClickID = this.passClickID.bind(this);
         this.removeFrogs = this.removeFrogs.bind(this);
         this.x = null;
@@ -43,7 +43,7 @@ class Gameboard {
             for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogArray[frogArrayIndexOuter].length; frogArrayIndexInner++){
                 createFrogsIndex++;
                 if (this.frogArray[frogArrayIndexOuter][frogArrayIndexInner] === 1){
-                    this.newFrog.createFrogs(createFrogsIndex);
+                    this.renderFrog.createFrogs(createFrogsIndex);
                     //display frog
                 }else{
                     //don't
