@@ -9,7 +9,6 @@ class Gameboard {
         this.removeFrogHandler = this.removeFrogHandler.bind(this);
         this.x = null;
         this.y = null;
-
         this.firstClick;
         this.secondClick;
 
@@ -41,7 +40,7 @@ class Gameboard {
             for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
                 createFrogsIndex++;
                 if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner] === 1){
-                    this.renderFrog.createFrogs(createFrogsIndex);
+                    this.renderFrog.appendFrogsToBoard(createFrogsIndex);
                     //display frog
                 }else{
                     //don't
