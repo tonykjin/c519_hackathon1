@@ -11,6 +11,7 @@ class Gameboard {
         this.y = null;
         this.firstClick;
         this.secondClick;
+        this.points = 0;
 
         this.frogGrid = [[1,1,1,1,1],
                           [1,1,1,1,1],
@@ -78,6 +79,7 @@ class Gameboard {
 
                     this.firstClick = undefined;
                     this.secondClick = undefined;
+                    this.points++;
                 }
             }  if (y === this.y - 2 && x === this.x){
                  if (this.frogGrid[this.y - 1][this.x] === 1) {
@@ -92,7 +94,9 @@ class Gameboard {
 
                      this.firstClick = undefined;
                      this.secondClick = undefined;
-                }
+                     this.points++;
+
+                 }
             } if (y === this.y && x === this.x + 2){
                 if (this.frogGrid[this.y][this.x+1] === 1) {
                     $('#' + this.y + '-' + this.x + ' .frogImg').hide();
@@ -106,6 +110,8 @@ class Gameboard {
 
                     this.firstClick = undefined;
                     this.secondClick = undefined;
+                    this.points++;
+
                 }
             } if (y === this.y && x === this.x - 2){
                 if (this.frogGrid[this.y][this.x-1] === 1) {
@@ -119,6 +125,8 @@ class Gameboard {
                     this.addFrogHandler(y, x);
                     this.firstClick = undefined;
                     this.secondClick = undefined;
+                    this.points++;
+
                 }
             } else {
                 this.firstClick = undefined;
@@ -127,6 +135,11 @@ class Gameboard {
 
         }
     }
+
+    checksPossibleMovesToEndGame(){
+
+    }
+
     firstClickFunction(id) {
         this.y = parseInt(id.split('-')[0]);
         this.x = parseInt(id.split('-')[1]);
