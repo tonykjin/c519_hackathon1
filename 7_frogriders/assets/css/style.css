@@ -118,12 +118,20 @@ button {
     border: none;
     border-radius: 15px;
     box-shadow: 0 3px #999;
-  }
+}
   
-  button:hover {background-color: #9e2121}
-  
-  button:active {
+button:hover {background-color: #9e2121}
+ 
+button:active {
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
-  }
+}
+
+.popup-overlay {
+    display:none;
+}
+    
+.popup-content {
+    display: none;
+}
