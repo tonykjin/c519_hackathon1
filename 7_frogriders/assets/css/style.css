@@ -1,5 +1,5 @@
 body {
-    background-image: url('shrekSwamp.jpg');
+    background-image: url('../images/shrekSwamp.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 97vh;
@@ -19,7 +19,7 @@ body {
 }
 
 .titleImg {
-    background-image: url('oie_transparent.png');
+    background-image: url('../images/oie_transparent.png');
     background-size: contain;
     height: 70%;
     background-position: center;
@@ -77,30 +77,39 @@ body {
     justify-content: space-around;
 }
 
-.gameSquare {
+.square {
     width: 19%;
     height: 19%;
     position: relative;
     margin-top: .33%;
-    background-image: url("realLily.png");
+    background-image: url("../images/realLily.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 
+
+.square:hover {background-color: rgba(255, 255, 255, 0.3)}
+
+
+.border {
+    outline: groove 5px rgba(60, 220, 220, 0.6);
+}
+
+.yellowBackground {
+    background-color: rgba(240, 240, 70, 0.3);
+}
+
+
+
 .frogImg {
-    background-image: url('transparentFrog.png');
+    background-image: url('../images/transparentFrog.png');
     background-size: 40%;
     background-repeat: no-repeat;
     height: 100%;
     width: 100%;
     position: absolute;
     background-position: center;
-}
-
-.Middle {
-    display: none;
-
 }
 
 .village {
