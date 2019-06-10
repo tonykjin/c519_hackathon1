@@ -1,11 +1,11 @@
 $(document).ready(startApp);
 
-var newGameBoard
+var newGameBoard;
 
 function startApp() {
     newGameBoard = new Gameboard();
     newGameBoard.addEventListeners();
-    newGameBoard.generateFrogIndex();
+    newGameBoard.generateFrogs();
 }
 
 
