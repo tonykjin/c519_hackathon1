@@ -1,8 +1,8 @@
 class Gameboard {
     
-
-    constructor() {
-
+    constructor(firstPlayerObject, secondPlayerObject) {
+        this.firstPlayerData = firstPlayerObject;
+        this.secondPlayerData = secondPlayerObject;
         this.firstClickFunction = this.firstClickFunction.bind(this);
         this.renderFrog = new Frog();
         this.passClickID = this.passClickID.bind(this);
@@ -11,12 +11,13 @@ class Gameboard {
         this.y = null;
         this.firstClick;
         this.secondClick;
+        this.playerMoveCounter = 1;
 
-        this.frogGrid = [[1,1,1,1,1],
+        this.frogGrid = [ [1,1,1,1,1],
                           [1,1,1,1,1],
                           [1,1,0,1,1],
                           [1,1,1,1,1],
-                          [1,1,1,1,1]];
+                          [1,1,1,1,1] ];
     }
     addEventListeners() {
 
@@ -31,7 +32,6 @@ class Gameboard {
             this.firstClick = $(event.currentTarget).attr('id');
             this.firstClickFunction(this.firstClick);
         }
-
     }
 
     generateFrogIndex() {
@@ -58,13 +58,11 @@ class Gameboard {
         }
         return this.frogGrid[y][x];
     }
-    moveFrogCondition(y, x) {
+    moveFrogCondition(y, x, player) {
         y = parseInt(y);
         x = parseInt(x);
 
         if (this.frogGrid[y][x] === 0) {
-
-
             if (y === this.y + 2 && x === this.x){
                 if (this.frogGrid[this.y + 1][this.x] === 1) {
                     $('#' + this.y + '-' + this.x + ' .frogImg').hide();
@@ -74,8 +72,9 @@ class Gameboard {
                     this.removeFrogHandler(this.y + 1, this.x);
 
                     $('#' + y + '-' + x).append($('<div>').addClass('frogImg'));
+                    
                     this.addFrogHandler(y, x);
-
+                    player.incrementPlayerScore();
                     this.firstClick = undefined;
                     this.secondClick = undefined;
                 }
@@ -88,8 +87,9 @@ class Gameboard {
                      this.removeFrogHandler(this.y-1, this.x);
 
                      $('#' + y + '-' + x).append($('<div>').addClass('frogImg'));
+                     
                      this.addFrogHandler(y, x);
-
+                     player.incrementPlayerScore();
                      this.firstClick = undefined;
                      this.secondClick = undefined;
                 }
@@ -102,8 +102,9 @@ class Gameboard {
                     this.removeFrogHandler(this.y, this.x+1);
 
                     $('#' + y + '-' + x).append($('<div>').addClass('frogImg'));
+                    
                     this.addFrogHandler(y, x);
-
+                    player.incrementPlayerScore();
                     this.firstClick = undefined;
                     this.secondClick = undefined;
                 }
@@ -116,7 +117,9 @@ class Gameboard {
                     this.removeFrogHandler(this.y, this.x-1);
 
                     $('#' + y + '-' + x).append($('<div>').addClass('frogImg'));
+
                     this.addFrogHandler(y, x);
+                    player.incrementPlayerScore();
                     this.firstClick = undefined;
                     this.secondClick = undefined;
                 }
@@ -135,8 +138,13 @@ class Gameboard {
     secondClickFunction(id){
         var y = parseInt(id.split('-')[0]);
         var x = parseInt(id.split('-')[1]);
-
-        this.moveFrogCondition(y,x);
+        if (playerMoveCounter === 1) {
+            this.moveFrogCondition(y,x,firstPlayerData);
+            return playerMoveCounter++;
+        } else if (playerMoveCounter === 2) {
+            this.moveFrogCondition(y,x,secondPlayerData);
+            return playerMoveCounter--;
+        }
     }
 
     removeFrogHandler(targetY, targetX){
