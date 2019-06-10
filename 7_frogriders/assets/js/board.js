@@ -111,7 +111,7 @@ class Gameboard {
         this.secondClick = undefined;
 
 
-        this.checkEndGame();                //after every click check if there are any more valid moves
+        this.checkEndGame();                //after every second click check if there are any more valid moves
     }
 
 
@@ -226,9 +226,6 @@ class Gameboard {
                 }
             }
         }
-        console.log('moves: ',possibleMoves);
-        console.log(this.frogGrid);
-
 
         if(possibleMoves === 0){
             console.log('you win! you scored '+this.points+' points!');
