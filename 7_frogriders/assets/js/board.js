@@ -40,6 +40,7 @@ class Gameboard {
 
         $('.square').click(this.passClickID);
         $('.resetContainer button').click(this.reset);
+        $('.victory-content').on('click','.player-reset-button',this.reset);
     }
 
 
@@ -242,11 +243,26 @@ class Gameboard {
         }
 
         if(possibleMoves === 0){
-            console.log('you win! you scored '+this.points+' points!');
+            $('.victory-modal').css('display','block');
+
+            if (player1.playerScore > player2.playerScore){
+                $('.victory-content p .player').text(player1.playerName);
+                $('.victory-content p .points').text(player1.playerScore);
+            } else if (player1.playerScore < player2.playerScore){
+                $('.victory-content p .player').text(player2.playerName);
+                $('.victory-content p .points').text(player2.playerScore);
+            } else {
+                $('.victory-content p').text('It\'s a tie!');
+            }
+
+
+
         }
     }
 
     reset(){
+        console.log('reset');
+        $('.victory-modal').css('display','none');
 
         for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){   //loops through all spaces
             for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
@@ -263,6 +279,11 @@ class Gameboard {
                           [1,1,1,1,1] ];
 
         this.generateFrogs();
+
+        player1.playerScore = 0;
+        $('.' + player1.playerPosition + 'PlayerScore').text(player1.playerScore).show();
+        player2.playerScore = 0;
+        $('.' + player2.playerPosition + 'PlayerScore').text(player2.playerScore).show();
 
 
     }
