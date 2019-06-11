@@ -153,18 +153,76 @@ button:active {
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
   }
-  .modal-content {
+  .input-content {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fefefe; 
+    background-color: #3e8e41; 
     border: 1px solid #888;
-    height: 70%;
+    height: 100%;
     width: 80%; 
     position: absolute;
   }  
+  .modal-title {
+    background-image: url('../images/oie_transparent.png');
+    background-size: contain;
+    height: 40%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
-  }  
+.first-player-input {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 10%;
+    width: 30%;
+    font-size: 15px;
+    position: absolute;
+    display: inline-block;
+}
+.second-player-input {
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 10%;
+    width: 30%;
+    font-size: 15px;
+    position: absolute;
+    display: inline-block;
+}
+.player-input-button {
+    top: 60%;
+    left: 50%;
+    height: 70px;
+    width: 200px;
+    position: absolute;
+    text-align: center;
+    padding: 10px 15px;
+    color: red;
+    font-size: 20px;
+    background-color: white;
+    
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    color: darkgray;
+    background-color: #65733E;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 3px #999;
+}
+
+button:hover {background-color: #9e2121}
+
+button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 .modal {
@@ -215,4 +273,10 @@ button:active {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.cappedFrogDisplay {
+    color: black;
+    font-size: 20px;
+    align: center;
 }

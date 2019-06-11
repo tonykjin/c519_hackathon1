@@ -6,8 +6,7 @@ class Player {
     }
     incrementPlayerScore() {
         this.playerScore ++;
-        $('.cappedFrogDisplay').text(this.playerScore).show();
-        
+        $('.' + this.playerPosition + 'PlayerScore').text(this.playerScore).show();        
     }
     displayNameToDom() {
         $('.player-' + this.playerPosition).text(this.playerName);

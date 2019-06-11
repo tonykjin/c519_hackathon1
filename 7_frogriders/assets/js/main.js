@@ -7,6 +7,21 @@ var player2;
 function startApp() {
     playerLoadScreen = new Loadscreen();
     $(window).on('load', playerLoadScreen.showModal());
+
+    var modal = $('#simpleModal');
+    var modalBtn = $('#modalBtn');
+    var closeBtn = $('.closeBtn');
+
+    modalBtn.on('click', openModal);
+    closeBtn.on('click', closeModal);
+
+    function openModal(){
+        $(modal).css('display','block');
+    }
+    function closeModal() {
+        $(modal).css('display','none');
+    }
+    
 }
 
 class Loadscreen {
@@ -16,7 +31,7 @@ class Loadscreen {
     }
     showModal() {
         $('.player-input-modal').show();
-        $('.modal-content').show();
+        $('.input-content').show();
         $('.player-input-button').on('click', this.enterGame);
     }
     enterGame() {
@@ -27,32 +42,13 @@ class Loadscreen {
         player1.displayNameToDom();
         player2.displayNameToDom();
         $('.player-input-modal').hide();
-        $('.modal-content').hide();
+        $('.input-content').hide();
         newGameBoard = new Gameboard(player1, player2);                 
         newGameBoard.addEventListeners();
         newGameBoard.generateFrogs();
     }
 }
 
-    var modal = $('#simpleModal');
-    var modalBtn = $('#modalBtn');
-    var closeBtn = $('.closeBtn');
+    
 
-    modalBtn.on('click', openModal);
-    closeBtn.on('click', closeModal);
-    $("window").on('click', outsideClick);
-
-    function openModal(){
-        $(modal).css('display','block');
-    }
-    function closeModal() {
-        $(modal).css('display','none');
-    }
-    function outsideClick(event){
-        if(event == modal) {
-            $(modal).css('display','none');
-        }
-    }
-
-}
 
