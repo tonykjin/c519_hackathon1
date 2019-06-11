@@ -2,8 +2,8 @@ class Frog {
     constructor() {
         this.makeFrog = null;
     }
-    appendFrogsToBoard(frogCount) {
+    appendFrogToBoard(index, row) {
         this.makeFrog = $('<div>').addClass('frogImg');
-        $('.' + frogCount).append(this.makeFrog);
+        $('#' + index + '-' + row).append(this.makeFrog);
     }
 }

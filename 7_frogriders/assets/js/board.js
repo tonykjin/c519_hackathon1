@@ -3,148 +3,256 @@ class Gameboard {
 
     constructor() {
 
-        this.firstClickFunction = this.firstClickFunction.bind(this);
+        this.firstClickHandler = this.firstClickHandler.bind(this);
         this.renderFrog = new Frog();
         this.passClickID = this.passClickID.bind(this);
-        this.removeFrogHandler = this.removeFrogHandler.bind(this);
-        this.x = null;
-        this.y = null;
+        this.removeFrog = this.removeFrog.bind(this);
+        this.reset =this.reset.bind(this);
+        this.x1 = null;
+        this.y1 = null;
         this.firstClick;
         this.secondClick;
+        this.points = 0;
 
-        this.frogGrid = [[1,1,1,1,1],
+        this.frogGrid = [ [1,1,1,1,1],
                           [1,1,1,1,1],
                           [1,1,0,1,1],
                           [1,1,1,1,1],
-                          [1,1,1,1,1]];
-    }
-    addEventListeners() {
-
-        $('.gameSquare').click(this.passClickID);
+                          [1,1,1,1,1] ];
     }
 
-    passClickID(event) {
-        if (this.firstClick !== undefined){
-            this.secondClick = $(event.currentTarget).attr('id');
-            this.secondClickFunction(this.secondClick);
-        }else if(this.firstClick === undefined) {
-            this.firstClick = $(event.currentTarget).attr('id');
-            this.firstClickFunction(this.firstClick);
-        }
 
-    }
-
-    generateFrogIndex() {
-        var createFrogsIndex = 0;
+    generateFrogs() {                                                   //loops through the preset array to create initial frog objects, called in main.js
         for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){
             for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
-                createFrogsIndex++;
-                if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner] === 1){
-                    this.renderFrog.appendFrogsToBoard(createFrogsIndex);
-                    //display frog
-                }else{
-                    //don't
+                if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner] === 1) {
+                    this.renderFrog.appendFrogToBoard(frogArrayIndexInner, frogArrayIndexOuter);
                 }
             }
         }
-
     }
-    getValueFromPosition(x, y) {
-        if(this.frogGrid[y] === undefined) {
-            return false;
-        }
-        if (this.frogGrid[y][x] === undefined){
-            return false;
-        }
-        return this.frogGrid[y][x];
+
+
+
+    addEventListeners() {
+
+        $('.square').click(this.passClickID);
+        $('.resetContainer button').click(this.reset);
     }
-    moveFrogCondition(y, x) {
-        y = parseInt(y);
-        x = parseInt(x);
-
-        if (this.frogGrid[y][x] === 0) {
 
 
-            if (y === this.y + 2 && x === this.x){
-                if (this.frogGrid[this.y + 1][this.x] === 1) {
-                    $('#' + this.y + '-' + this.x + ' .frogImg').hide();
-                    this.removeFrogHandler(this.y, this.x);
-
-                    $('#' + (this.y+1) + '-' + this.x + ' .frogImg').hide();
-                    this.removeFrogHandler(this.y + 1, this.x);
-
-                    $('#' + y + '-' + x).append($('<div>').addClass('frogImg'));
-                    this.addFrogHandler(y, x);
-
-                    this.firstClick = undefined;
-                    this.secondClick = undefined;
+    passClickID(event) {
+        if (this.firstClick !== undefined){                             //if the first click has already happened
+            if ($(event.currentTarget).attr('id') === this.firstClick){ //check to see if you're clicking the same div
+                this.firstClick = undefined;                            //if so, unselect the div
+                $('#'+this.y1+'-'+this.x1).removeClass('yellowBackground');
+                for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){
+                    for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
+                        var frogIndex = $('#' + frogArrayIndexOuter + '-' + frogArrayIndexInner);
+                        if (frogIndex.hasClass('border')) {
+                            frogIndex.removeClass('border');
+                        }
+                    }
                 }
-            }  if (y === this.y - 2 && x === this.x){
-                 if (this.frogGrid[this.y - 1][this.x] === 1) {
-                     $('#' + this.y + '-' + this.x + ' .frogImg').hide();
-                     this.removeFrogHandler(this.y, x);
-
-                     $('#' + (this.y-1) + '-' + this.x + ' .frogImg').hide();
-                     this.removeFrogHandler(this.y-1, this.x);
-
-                     $('#' + y + '-' + x).append($('<div>').addClass('frogImg'));
-                     this.addFrogHandler(y, x);
-
-                     this.firstClick = undefined;
-                     this.secondClick = undefined;
-                }
-            } if (y === this.y && x === this.x + 2){
-                if (this.frogGrid[this.y][this.x+1] === 1) {
-                    $('#' + this.y + '-' + this.x + ' .frogImg').hide();
-                    this.removeFrogHandler(this.y, this.x);
-
-                    $('#' + (this.y) + '-' + (this.x+1) + ' .frogImg').hide();
-                    this.removeFrogHandler(this.y, this.x+1);
-
-                    $('#' + y + '-' + x).append($('<div>').addClass('frogImg'));
-                    this.addFrogHandler(y, x);
-
-                    this.firstClick = undefined;
-                    this.secondClick = undefined;
-                }
-            } if (y === this.y && x === this.x - 2){
-                if (this.frogGrid[this.y][this.x-1] === 1) {
-                    $('#' + this.y + '-' + this.x + ' .frogImg').hide();
-                    this.removeFrogHandler(this.y, this.x);
-
-                    $('#' + (this.y) + '-' + (this.x-1) + ' .frogImg').hide();
-                    this.removeFrogHandler(this.y, this.x-1);
-
-                    $('#' + y + '-' + x).append($('<div>').addClass('frogImg'));
-                    this.addFrogHandler(y, x);
-                    this.firstClick = undefined;
-                    this.secondClick = undefined;
-                }
-            } else {
-                this.firstClick = undefined;
-                this.secondClick = undefined;
+            }
+            else {
+                this.secondClick = $(event.currentTarget).attr('id');   // if else, go ahead and select the second div
+                this.secondClickHandler(this.secondClick);
             }
 
+
+
+        }else {                                                         //if the first click hasn't already happened
+            this.firstClick = $(event.currentTarget).attr('id');        //select the div
+            this.firstClickHandler(this.firstClick);
+
+        }
+
+    }
+
+
+    firstClickHandler(id) {
+        this.y1 = parseInt(id.split('-')[0]);       //split up the id into coordinates
+        this.x1 = parseInt(id.split('-')[1]);
+        if (this.frogGrid[this.y1][this.x1] === 0){     //only clicks if there's a frog
+            this.y1 = undefined;
+            this.y2 = undefined;
+            this.firstClick = undefined;
+        } else {
+            this.highlightSquares(this.x1, this.y1,'yellowBackground');         //highlights selected square
+            this.checksPossibleMoves();             //outlines all valid squares
         }
     }
-    firstClickFunction(id) {
-        this.y = parseInt(id.split('-')[0]);
-        this.x = parseInt(id.split('-')[1]);
+
+
+
+    secondClickHandler(id){
+        this.y2 = parseInt(id.split('-')[0]);           //splits id into coordinates
+        this.x2 = parseInt(id.split('-')[1]);
+
+        if (this.frogGrid[this.y2][this.x2] === 0){         //only clicks if empty square
+
+            this.moveFrogs();
+
+            for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){        //gets rid of outlines on squares
+                for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
+                    var frogIndex = $('#' + frogArrayIndexOuter + '-' + frogArrayIndexInner);
+                    if (frogIndex.hasClass('border')) {
+                        frogIndex.removeClass('border');
+                    }
+                }
+            }
+
+            $('#'+this.y1+'-'+this.x1).removeClass('yellowBackground');         //gets rid of highlighting on selected square
+
+
+        }
+
+        this.y2 = undefined;                        //resets second click if not valid
+        this.x2 = undefined;
+        this.secondClick = undefined;
+
+
+        this.checkEndGame();                //after every second click check if there are any more valid moves
     }
 
-    secondClickFunction(id){
-        var y = parseInt(id.split('-')[0]);
-        var x = parseInt(id.split('-')[1]);
 
-        this.moveFrogCondition(y,x);
-    }
 
-    removeFrogHandler(targetY, targetX){
+    removeFrog(targetY, targetX){
+
+        $('#' + targetY + '-' + targetX + ' .frogImg').remove();
         this.frogGrid[targetY].splice(targetX ,1,0);
 
     }
 
-    addFrogHandler(targetY, targetX){
+
+
+    addFrog(targetY, targetX){
+        $('#' + targetY + '-' + targetX).append($('<div>').addClass('frogImg'));
         this.frogGrid[targetY].splice(targetX ,1,1);
+    }
+
+
+    moveFrogs() {
+
+
+        if ((this.y2 === this.y1 + 2 && this.x2 === this.x1) || (this.y2 === this.y1 - 2 && this.x2 === this.x1) || (this.y2 === this.y1 && this.x2 === this.x1 + 2) || (this.y2 === this.y1 && this.x2 === this.x1 - 2)){
+            //if the second div is 2 below the first div        //if the second div is 2 above the first div        //if the second div is 2 right of the first div     //if the second div is 2 left of the first div
+
+            if (this.frogGrid[(this.y1 + this.y2)/2][(this.x1 + this.x2)/2] === 1) {      //and the div in between has a frog
+
+                this.removeFrog(this.y1, this.x1);  //removes the frog from the first click
+
+                this.removeFrog((this.y1 + this.y2)/2, (this.x1 + this.x2)/2); //removes the frog from in between
+
+                this.addFrog(this.y2, this.x2);    // adds the frog to the empty div
+
+                this.points++;          //adds point
+
+            }
+        }
+
+        this.firstClick = undefined;        //resets first click
+        this.secondClick = undefined;       //resets second click
+    }
+
+
+    checksPossibleMoves(){
+        var w = null;
+        var v = null;
+
+
+        if (this.frogGrid[this.y1 + 2] !== undefined){         //if there's a square 2 down
+            if (this.frogGrid[this.y1 + 1][this.x1] === 1 && this.frogGrid[this.y1 + 2][this.x1] === 0) {    //if there's a frog 1 down and empty square 2 down
+                w = this.y1 + 2;
+                v = this.x1;
+                this.highlightSquares(v, w, 'border');      //outline the square 2 down
+            }
+        }
+
+        if (this.frogGrid[this.y1-2] !== undefined){         //if there's a square 2 up
+            if (this.frogGrid[this.y1 - 1][this.x1] === 1 && this.frogGrid[this.y1-2][this.x1] === 0) {     //if there's a frog 1 up and empty square 2 up
+                w = this.y1 - 2;
+                v = this.x1;
+                this.highlightSquares(v, w, 'border');      //outline the square 2 up
+            }
+        }
+
+        if (this.frogGrid[this.y1][this.x1+2] !== undefined){        //if there's a square 2 right
+            if (this.frogGrid[this.y1][this.x1+1] === 1 && this.frogGrid[this.y1][ this.x1+2] === 0) {      //if there's a frog 1 right and empty square 2 right
+                w = this.y1;
+                v = this.x1 + 2;
+                this.highlightSquares(v, w,'border');       //outline the square 2 right
+            }
+        }
+
+        if (this.frogGrid[this.y1][this.x1-2] !== undefined){        //if there's a square 2 left
+            if (this.frogGrid[this.y1][this.x1-1] === 1 && this.frogGrid[this.y1][this.x1-2] === 0) {       //if there's a frog 1 left and empty square 2 left
+                w = this.y1;
+                v = this.x1-2;
+                this.highlightSquares(v, w,'border');       //outline the square 2 left
+            }
+        }
+    }
+
+    highlightSquares(x, y, color){
+        $('#'+y+'-'+x).addClass(color);
+    }
+
+    checkEndGame(){
+        var possibleMoves = 0;
+
+        for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){   //loops through all spaces
+            for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
+                if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner] === 1){         //if a space has a frog in it adds 1 to possibleMoves if possible
+                    if (this.frogGrid[frogArrayIndexOuter + 2] !== undefined){
+                        if (this.frogGrid[frogArrayIndexOuter + 1][frogArrayIndexInner] === 1 && this.frogGrid[frogArrayIndexOuter + 2][frogArrayIndexInner] === 0) {
+                            possibleMoves++;
+                        }
+                    }
+                    if (this.frogGrid[frogArrayIndexOuter - 2] !== undefined){
+                        if (this.frogGrid[frogArrayIndexOuter - 1][frogArrayIndexInner] === 1 && this.frogGrid[frogArrayIndexOuter-2][frogArrayIndexInner] === 0) {
+                            possibleMoves++;
+                        }
+                    }
+                    if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner + 2] !== undefined){
+                        if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner+1] === 1 && this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner+2] === 0) {
+                            possibleMoves++;
+                        }
+                    }
+                    if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner - 2] !== undefined){
+                        if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner-1] === 1 && this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner-2] === 0) {
+                            possibleMoves++;
+                        }
+                    }
+                }
+            }
+        }
+
+        if(possibleMoves === 0){
+            console.log('you win! you scored '+this.points+' points!');
+        }
+    }
+
+    reset(){
+
+        for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){   //loops through all spaces
+            for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
+                if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner] === 1){         //if a space has a frog in it, remove the frog
+                    debugger;
+                    this.removeFrog(frogArrayIndexOuter, frogArrayIndexInner);
+                }
+            }
+        }
+
+        this.frogGrid = [ [1,1,1,1,1],
+                          [1,1,1,1,1],
+                          [1,1,0,1,1],
+                          [1,1,1,1,1],
+                          [1,1,1,1,1] ];
+
+        this.generateFrogs();
+
+
     }
 }
