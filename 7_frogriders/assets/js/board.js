@@ -8,6 +8,7 @@ class Gameboard {
         this.renderFrog = new Frog();
         this.passClickID = this.passClickID.bind(this);
         this.removeFrog = this.removeFrog.bind(this);
+        this.reset =this.reset.bind(this);
         this.x1 = null;
         this.y1 = null;
         this.firstClick;
@@ -38,6 +39,7 @@ class Gameboard {
     addEventListeners() {
 
         $('.square').click(this.passClickID);
+        $('.resetContainer button').click(this.reset);
     }
 
 
@@ -119,14 +121,18 @@ class Gameboard {
         this.x2 = undefined;
         this.secondClick = undefined;
 
+
         this.checkEndGame();                //after every click check if there are any more valid moves
+
+
+        this.checkEndGame();                //after every second click check if there are any more valid moves
     }
 
 
 
     removeFrog(targetY, targetX){
 
-        $('#' + targetY + '-' + targetX + ' .frogImg').hide();
+        $('#' + targetY + '-' + targetX + ' .frogImg').remove();
         this.frogGrid[targetY].splice(targetX ,1,0);
 
     }
@@ -234,12 +240,31 @@ class Gameboard {
                 }
             }
         }
-        console.log('moves: ',possibleMoves);
-        console.log(this.frogGrid);
-
 
         if(possibleMoves === 0){
             console.log('you win! you scored '+this.points+' points!');
         }
+    }
+
+    reset(){
+
+        for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){   //loops through all spaces
+            for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
+                if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner] === 1){         //if a space has a frog in it, remove the frog
+                    debugger;
+                    this.removeFrog(frogArrayIndexOuter, frogArrayIndexInner);
+                }
+            }
+        }
+
+        this.frogGrid = [ [1,1,1,1,1],
+                          [1,1,1,1,1],
+                          [1,1,0,1,1],
+                          [1,1,1,1,1],
+                          [1,1,1,1,1] ];
+
+        this.generateFrogs();
+
+
     }
 }
