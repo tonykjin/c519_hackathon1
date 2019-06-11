@@ -1,8 +1,9 @@
 class Gameboard {
     
 
-    constructor() {
-
+    constructor( firstPlayerObject, secondPlayerObject ) {
+        this.firstPlayer = firstPlayerObject;
+        this.secondPlayer = secondPlayerObject;
         this.firstClickHandler = this.firstClickHandler.bind(this);
         this.renderFrog = new Frog();
         this.passClickID = this.passClickID.bind(this);
@@ -12,6 +13,7 @@ class Gameboard {
         this.firstClick;
         this.secondClick;
         this.points = 0;
+        this.playerMoveCounter = 1;
 
         this.frogGrid = [ [1,1,1,1,1],
                           [1,1,1,1,1],
@@ -89,8 +91,11 @@ class Gameboard {
         this.x2 = parseInt(id.split('-')[1]);
 
         if (this.frogGrid[this.y2][this.x2] === 0){         //only clicks if empty square
-
-            this.moveFrogs();
+            if (this.playerMoveCounter === 1) {                  //if first player has not gone this turn
+                this.moveFrogs(this.firstPlayer);     
+            } else if (this.playerMoveCounter === 2) {           //first player has gone already -
+                this.moveFrogs(this.secondPlayer);               //apply points to next player
+            }
 
             for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){        //gets rid of outlines on squares
                 for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
@@ -105,11 +110,14 @@ class Gameboard {
 
 
         }
-
+        if (this.playerMoveCounter === 1) {                         //if player 1 just took his turn
+            this.playerMoveCounter = 2;                                //second player's turn
+        } else {
+            this.playerMoveCounter = 1;                                 // else - first player's turn
+        }
         this.y2 = undefined;                        //resets second click if not valid
         this.x2 = undefined;
         this.secondClick = undefined;
-
 
         this.checkEndGame();                //after every click check if there are any more valid moves
     }
@@ -131,7 +139,7 @@ class Gameboard {
     }
 
 
-    moveFrogs() {
+    moveFrogs(player) {
 
 
         if ((this.y2 === this.y1 + 2 && this.x2 === this.x1) || (this.y2 === this.y1 - 2 && this.x2 === this.x1) || (this.y2 === this.y1 && this.x2 === this.x1 + 2) || (this.y2 === this.y1 && this.x2 === this.x1 - 2)){
@@ -143,9 +151,9 @@ class Gameboard {
 
                 this.removeFrog((this.y1 + this.y2)/2, (this.x1 + this.x2)/2); //removes the frog from in between
 
-                this.addFrog(this.y2, this.x2);    // adds the frog to the empty div
+                this.addFrog(this.y2, this.x2);    //adds the frog to the empty div
 
-                this.points++;          //adds point
+                player.incrementPlayerScore();          //adds point
 
             }
         }
