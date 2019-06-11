@@ -24,7 +24,7 @@ class Gameboard {
     }
 
 
-    generateFrogs() {                                                   //loops through the preset array to create initial frog objects, called in main.js
+    generateFrogs() {                                                   
         for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){
             for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
                 if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner] === 1) {
@@ -46,8 +46,8 @@ class Gameboard {
 
     passClickID(event) {
         if (this.firstClick !== undefined){                             
-            if ($(event.currentTarget).attr('id') === this.firstClick){ //check to see if you're clicking the same div
-                this.firstClick = undefined;                            //if so, unselect the div
+            if ($(event.currentTarget).attr('id') === this.firstClick){ 
+                this.firstClick = undefined;                            
                 $('#'+this.y1+'-'+this.x1).removeClass('yellowBackground');
                 for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){
                     for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
@@ -100,7 +100,7 @@ class Gameboard {
                 this.moveFrogs(this.secondPlayer);
             }
 
-            for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){        //gets rid of outlines on squares
+            for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){        
                 for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
                     var frogIndex = $('#' + frogArrayIndexOuter + '-' + frogArrayIndexInner);
                     if (frogIndex.hasClass('border')) {
@@ -109,24 +109,24 @@ class Gameboard {
                 }
             }
 
-            $('#'+this.y1+'-'+this.x1).removeClass('yellowBackground');         //gets rid of highlighting on selected square
+            $('#'+this.y1+'-'+this.x1).removeClass('yellowBackground');         
 
 
         }
-        if (this.playerMoveCounter === 1) {                         //if player 1 just took his turn
-            this.playerMoveCounter = 2;                                //second player's turn
+        if (this.playerMoveCounter === 1) {                         
+            this.playerMoveCounter = 2;                                
         } else {
-            this.playerMoveCounter = 1;                                 // else - first player's turn
+            this.playerMoveCounter = 1;                                 
         }
-        this.y2 = undefined;                        //resets second click if not valid
+        this.y2 = undefined;                        
         this.x2 = undefined;
         this.secondClick = undefined;
 
 
-        this.checkEndGame();                //after every click check if there are any more valid moves
+        this.checkEndGame();                
 
 
-        this.checkEndGame();                //after every second click check if there are any more valid moves
+        this.checkEndGame();                
     }
 
 
@@ -150,23 +150,23 @@ class Gameboard {
 
 
         if ((this.y2 === this.y1 + 2 && this.x2 === this.x1) || (this.y2 === this.y1 - 2 && this.x2 === this.x1) || (this.y2 === this.y1 && this.x2 === this.x1 + 2) || (this.y2 === this.y1 && this.x2 === this.x1 - 2)){
-            //if the second div is 2 below the first div        //if the second div is 2 above the first div        //if the second div is 2 right of the first div     //if the second div is 2 left of the first div
+            
 
-            if (this.frogGrid[(this.y1 + this.y2)/2][(this.x1 + this.x2)/2] === 1) {      //and the div in between has a frog
+            if (this.frogGrid[(this.y1 + this.y2)/2][(this.x1 + this.x2)/2] === 1) {      
 
-                this.removeFrog(this.y1, this.x1);  //removes the frog from the first click
+                this.removeFrog(this.y1, this.x1);  
 
-                this.removeFrog((this.y1 + this.y2)/2, (this.x1 + this.x2)/2); //removes the frog from in between
+                this.removeFrog((this.y1 + this.y2)/2, (this.x1 + this.x2)/2); 
 
-                this.addFrog(this.y2, this.x2);    //adds the frog to the empty div
+                this.addFrog(this.y2, this.x2);    
 
-                player.incrementPlayerScore();          //adds point
+                player.incrementPlayerScore();          
 
             }
         }
 
-        this.firstClick = undefined;        //resets first click
-        this.secondClick = undefined;       //resets second click
+        this.firstClick = undefined;        
+        this.secondClick = undefined;       
     }
 
 
@@ -175,35 +175,35 @@ class Gameboard {
         var v = null;
 
 
-        if (this.frogGrid[this.y1 + 2] !== undefined){         //if there's a square 2 down
-            if (this.frogGrid[this.y1 + 1][this.x1] === 1 && this.frogGrid[this.y1 + 2][this.x1] === 0) {    //if there's a frog 1 down and empty square 2 down
+        if (this.frogGrid[this.y1 + 2] !== undefined){         
+            if (this.frogGrid[this.y1 + 1][this.x1] === 1 && this.frogGrid[this.y1 + 2][this.x1] === 0) {    
                 w = this.y1 + 2;
                 v = this.x1;
-                this.highlightSquares(v, w, 'border');      //outline the square 2 down
+                this.highlightSquares(v, w, 'border');      
             }
         }
 
-        if (this.frogGrid[this.y1-2] !== undefined){         //if there's a square 2 up
-            if (this.frogGrid[this.y1 - 1][this.x1] === 1 && this.frogGrid[this.y1-2][this.x1] === 0) {     //if there's a frog 1 up and empty square 2 up
+        if (this.frogGrid[this.y1-2] !== undefined){         
+            if (this.frogGrid[this.y1 - 1][this.x1] === 1 && this.frogGrid[this.y1-2][this.x1] === 0) {     
                 w = this.y1 - 2;
                 v = this.x1;
-                this.highlightSquares(v, w, 'border');      //outline the square 2 up
+                this.highlightSquares(v, w, 'border');      
             }
         }
 
-        if (this.frogGrid[this.y1][this.x1+2] !== undefined){        //if there's a square 2 right
-            if (this.frogGrid[this.y1][this.x1+1] === 1 && this.frogGrid[this.y1][ this.x1+2] === 0) {      //if there's a frog 1 right and empty square 2 right
+        if (this.frogGrid[this.y1][this.x1+2] !== undefined){        
+            if (this.frogGrid[this.y1][this.x1+1] === 1 && this.frogGrid[this.y1][ this.x1+2] === 0) {      
                 w = this.y1;
                 v = this.x1 + 2;
-                this.highlightSquares(v, w,'border');       //outline the square 2 right
+                this.highlightSquares(v, w,'border');       
             }
         }
 
-        if (this.frogGrid[this.y1][this.x1-2] !== undefined){        //if there's a square 2 left
-            if (this.frogGrid[this.y1][this.x1-1] === 1 && this.frogGrid[this.y1][this.x1-2] === 0) {       //if there's a frog 1 left and empty square 2 left
+        if (this.frogGrid[this.y1][this.x1-2] !== undefined){        
+            if (this.frogGrid[this.y1][this.x1-1] === 1 && this.frogGrid[this.y1][this.x1-2] === 0) {       
                 w = this.y1;
                 v = this.x1-2;
-                this.highlightSquares(v, w,'border');       //outline the square 2 left
+                this.highlightSquares(v, w,'border');       
             }
         }
     }
@@ -215,9 +215,9 @@ class Gameboard {
     checkEndGame(){
         var possibleMoves = 0;
 
-        for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){   //loops through all spaces
+        for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){   
             for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
-                if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner] === 1){         //if a space has a frog in it adds 1 to possibleMoves if possible
+                if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner] === 1){         
                     if (this.frogGrid[frogArrayIndexOuter + 2] !== undefined){
                         if (this.frogGrid[frogArrayIndexOuter + 1][frogArrayIndexInner] === 1 && this.frogGrid[frogArrayIndexOuter + 2][frogArrayIndexInner] === 0) {
                             possibleMoves++;
@@ -261,12 +261,11 @@ class Gameboard {
     }
 
     reset(){
-        console.log('reset');
         $('.victory-modal').css('display','none');
 
-        for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){   //loops through all spaces
+        for (var frogArrayIndexOuter = 0; frogArrayIndexOuter < this.frogGrid.length; frogArrayIndexOuter++){   
             for (var frogArrayIndexInner = 0; frogArrayIndexInner < this.frogGrid[frogArrayIndexOuter].length; frogArrayIndexInner++){
-                if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner] === 1){         //if a space has a frog in it, remove the frog
+                if (this.frogGrid[frogArrayIndexOuter][frogArrayIndexInner] === 1){         
                     this.removeFrog(frogArrayIndexOuter, frogArrayIndexInner);
                 }
             }
