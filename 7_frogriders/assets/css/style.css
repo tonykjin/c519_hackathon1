@@ -1,5 +1,5 @@
 body {
-    background-image: url('shrekSwamp.jpg');
+    background-image: url('../images/shrekSwamp.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 97vh;
@@ -8,7 +8,7 @@ body {
 }
 .gameTitle{
     display: flex;
-    border: 2px solid #303d2b;
+    /* border: 2px solid #303d2b; */
     height: 15%;;
     margin-bottom: .5%;
 }
@@ -19,7 +19,7 @@ body {
 }
 
 .titleImg {
-    background-image: url('oie_transparent.png');
+    background-image: url('../images/oie_transparent.png');
     background-size: contain;
     height: 70%;
     background-position: center;
@@ -27,8 +27,9 @@ body {
 }
     
 .mainGameDisplay {
-    height: 65%;
+    height: 80%;
     display: flex;
+    text-align: center;
 }
 
 .mainGameDisplay > * {
@@ -36,15 +37,14 @@ body {
     height: 80%;
 }
 
-.playerDiv {
+.player {
     vertical-align: top;
-    text-align: center;
     height: 98%;
     width: 15%;
-    border: #303d2b solid 2px;
+    /* border: #303d2b solid 2px; */
 }
 
-.playerDiv h2{
+.player h3{
     height: 7%;
 }
 
@@ -57,6 +57,9 @@ body {
     width: 70%;
     height: 75%;
     margin: 20% auto;
+    background-color: #916952;
+    opacity: .3;
+    border-radius: 50px;
 }
 
 .pondContainer {
@@ -67,6 +70,9 @@ body {
     margin: 0 auto;
     display: flex;
     justify-content: space-around;
+    background-color: #42587c;
+    opacity: .7;
+    border-radius: 50px;
 }
 
 .gameContainer {
@@ -77,19 +83,33 @@ body {
     justify-content: space-around;
 }
 
-.gameSquare {
+.square {
     width: 19%;
     height: 19%;
     position: relative;
     margin-top: .33%;
-    background-image: url("realLily.png");
+    background-image: url("../images/realLily.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 
+
+.square:hover {background-color: rgba(255, 255, 255, 0.3)}
+
+
+.border {
+    outline: groove 5px rgba(60, 220, 220, 0.6);
+}
+
+.yellowBackground {
+    background-color: rgba(240, 240, 70, 0.3);
+}
+
+
+
 .frogImg {
-    background-image: url('transparentFrog.png');
+    background-image: url('../images/transparentFrog.png');
     background-size: 40%;
     background-repeat: no-repeat;
     height: 100%;
@@ -98,14 +118,70 @@ body {
     background-position: center;
 }
 
-.Middle {
+.player-input-modal {
     display: none;
-
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom:0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
-
-.village {
-    border: #303d2b 2px solid;
+  .input-content {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #3e8e41; 
+    border: 1px solid #888;
+    height: 95%;
+    width: 80%; 
+    position: absolute;
+  }  
+  .modal-title {
+    background-image: url('../images/oie_transparent.png');
+    background-size: contain;
     height: 15%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+.first-player-input {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 10%;
+    width: 30%;
+    font-size: 15px;
+    position: absolute;
+    display: inline-block;
+}
+.second-player-input {
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 10%;
+    width: 30%;
+    font-size: 15px;
+    position: absolute;
+    display: inline-block;
+}
+.player-input-button {
+    top: 65%;
+    left: 45%;
+    height: 7%;
+    width: 10%;
+    position: absolute;
+    text-align: center;
+    padding: 10px 15px;
+    color: red;
+    font-size: 20px;
+    background-color: white;
+    
 }
 
 button {
@@ -118,12 +194,101 @@ button {
     border: none;
     border-radius: 15px;
     box-shadow: 0 3px #999;
-  }
-  
-  button:hover {background-color: #9e2121}
-  
-  button:active {
+}
+
+button:hover {background-color: #9e2121}
+
+button:active {
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
-  }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content{
+    background-color: lightgray;
+    margin: 15% auto;
+    width: 70%;
+    color: black;
+}
+
+.modal-header h2, .modal-footer h3{
+    margin: 0;
+}
+
+.modal-header{
+    background: #303d2b;
+    padding: 15px;
+    color: yellow;
+}
+
+.modal-body{
+    padding: 10px 20px;
+}
+
+.modal-footer{
+    background: #303d2b;
+    padding: 10px;
+    color: yellow;
+}
+
+.closeBtn {
+    color: yellow;
+    float: right;
+    font-size: 30px;
+}
+
+.closeBtn:hover, .closeBtn:focus{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cappedFrogDisplay {
+    color: black;
+    font-size: 20px;
+    align: center;
+}
+
+.victory-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom:0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.victory-content {
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #3e8e41;
+    border: 1px solid #888;
+    height: 60%;
+    width: 80%;
+    position: absolute;
+}
+
+.victory-content p {
+    color: white;
+    font-size: 2.5rem;
+    padding: 50px;
+}
