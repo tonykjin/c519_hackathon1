@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="./assets/css/style.css">
         <script src="./assets/jquery-3.4.1.min.js"></script>
         <script src="./assets/js/frog.js"></script>
-        <script src="/assets/js/player.js"></script>
+        <script src="./assets/js/player.js"></script>
         <script src="./assets/js/board.js"></script>
         <script src="./assets/js/main.js"></script>
         <link rel="stylesheet" href="./assets/css/style.css">
@@ -97,9 +97,17 @@
         <div class="player-input-modal">
             <div class="input-content">
                 <h1 class="modal-title"> </h1>
-                <input type="text" class="first-player-input" placeholder="PLAYER 1 NAME">
-                <input type="text" class="second-player-input" placeholder="PLAYER 2 NAME">
+                <input type="text" class="first-player-input" placeholder="PLAYER 2 NAME">
+                <input type="text" class="second-player-input" placeholder="PLAYER 1 NAME">
                 <button class="player-input-button"> Enter </button>
+            </div>
+        </div>
+
+        <div class="victory-modal">
+            <div class="victory-content">
+                <h1 class="modal-title"> </h1>
+                <p><span class="player">PLAYER</span> won with <span class="points">POINTS</span> points!</p>
+                <button class="player-reset-button"> Play again? </button>
             </div>
         </div>
 
