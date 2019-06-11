@@ -9,8 +9,10 @@ function startApp() {
     $(window).on('load', playerLoadScreen.showModal());
     newGameBoard = new Gameboard(player1, player2);                 
     newGameBoard.addEventListeners();
+
+
     newGameBoard.generateFrogs();
-}
+
 
 class Loadscreen {
     constructor() {
@@ -33,3 +35,26 @@ class Loadscreen {
         $('.modal-content').hide();
     }
 }
+
+    var modal = $('#simpleModal');
+    var modalBtn = $('#modalBtn');
+    var closeBtn = $('.closeBtn');
+
+    modalBtn.on('click', openModal);
+    closeBtn.on('click', closeModal);
+    $("window").on('click', outsideClick);
+
+    function openModal(){
+        $(modal).css('display','block');
+    }
+    function closeModal() {
+        $(modal).css('display','none');
+    }
+    function outsideClick(event){
+        if(event == modal) {
+            $(modal).css('display','none');
+        }
+    }
+
+}
+
