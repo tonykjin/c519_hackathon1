@@ -7,9 +7,6 @@ var player2;
 function startApp() {
     playerLoadScreen = new Loadscreen();
     $(window).on('load', playerLoadScreen.showModal());
-    newGameBoard = new Gameboard(player1, player2);                 
-    newGameBoard.addEventListeners();
-    newGameBoard.generateFrogs();
 }
 
 class Loadscreen {
@@ -31,5 +28,8 @@ class Loadscreen {
         player2.displayNameToDom();
         $('.player-input-modal').hide();
         $('.modal-content').hide();
+        newGameBoard = new Gameboard(player1, player2);                 
+        newGameBoard.addEventListeners();
+        newGameBoard.generateFrogs();
     }
 }
