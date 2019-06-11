@@ -13,7 +13,6 @@ class Gameboard {
         this.y1 = null;
         this.firstClick;
         this.secondClick;
-        this.points = 0;
         this.playerMoveCounter = 1;
 
         this.frogGrid = [ [1,1,1,1,1],
@@ -59,7 +58,7 @@ class Gameboard {
                 }
             }
             else {
-                this.secondClick = $(event.currentTarget).attr('id');   
+                this.secondClick = $(event.currentTarget).attr('id');
                 this.secondClickHandler(this.secondClick);
             }
 
@@ -92,10 +91,11 @@ class Gameboard {
     secondClickHandler(id){
         this.y2 = parseInt(id.split('-')[0]);         
         this.x2 = parseInt(id.split('-')[1]);
+        debugger;
 
         if (this.frogGrid[this.y2][this.x2] === 0){
             if (this.playerMoveCounter === 1) {                
-                this.moveFrogs(this.firstPlayer);    
+                this.moveFrogs(this.firstPlayer);
             } else if (this.playerMoveCounter === 2) {          
                 this.moveFrogs(this.secondPlayer);
             }
@@ -109,15 +109,15 @@ class Gameboard {
                 }
             }
 
-            $('#'+this.y1+'-'+this.x1).removeClass('yellowBackground');         
+            $('#'+this.y1+'-'+this.x1).removeClass('yellowBackground');
 
+            if (this.playerMoveCounter === 1) {
+                this.playerMoveCounter = 2;
+            } else {
+                this.playerMoveCounter = 1;
+            }
+        }
 
-        }
-        if (this.playerMoveCounter === 1) {                         
-            this.playerMoveCounter = 2;                                
-        } else {
-            this.playerMoveCounter = 1;                                 
-        }
         this.y2 = undefined;                        
         this.x2 = undefined;
         this.secondClick = undefined;
@@ -165,8 +165,8 @@ class Gameboard {
             }
         }
 
-        this.firstClick = undefined;        
-        this.secondClick = undefined;       
+        this.firstClick = undefined;
+        this.secondClick = undefined;
     }
 
 
