@@ -16,16 +16,37 @@
 
         <div class="gameTitle">
             <div class="resetContainer">
-                <button>RESET</button>
+                <button>Reset</button>
             </div>
             <div class="titleImg">
             </div>
             <div class="infoContainer">
-                <button>  ?  </button>
+                <button id="modalBtn" class='button'>How To Play</button>
+
+                <div id="simpleModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span class="closeBtn">&times;</span>
+                            <h2>FROG RIDERS</h2>
+                        </div>
+                        <div class="modal-body">
+                            <p>How To Play</p>
+                            <p>Select a FrogRider to see available moves! <br>
+                                You can jump over adjacent an FrogRider who has an open lily pad behind them. <br> 
+                                Capture the most FrogRiders to win the game! </p>
+                        </div>
+                        <div class="modal-footer">
+                            <h3>Happy Frog Riding!</h3>
+                        </div>
+                        
+                    </div>
+                </div>
+
             </div>
         </div>
 
         <div class="mainGameDisplay">
+
             <div class="player firstPlayer">
                 <h3>PLAYER 1</h3>
                 <div class="frogCount">
@@ -33,6 +54,7 @@
                     <div class="cappedFrogDisplay"></div>
                 </div>
             </div>
+
             <div class="pondContainer">
                 <div class="gameContainer">
                     <div class="gameSquare 1" id="0-0"></div>
@@ -62,6 +84,7 @@
                     <div class="gameSquare 25" id="4-4"></div>
                 </div>
             </div>
+
             <div class="player secondPlayer">
                 <h3>PLAYER 2</h3>
                 <div class="frogCount">
@@ -71,11 +94,6 @@
             </div>
         </div>
 
-        <div class="village">
-            <h2>The Village</h2>
-        </div>
-
-        
 
     </body>
 </html>
