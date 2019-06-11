@@ -5,8 +5,9 @@ var newGameBoard;
 function startApp() {
     newGameBoard = new Gameboard();
     newGameBoard.addEventListeners();
-    newGameBoard.generateFrogIndex();
 
+
+    newGameBoard.generateFrogs();
 
     var modal = $('#simpleModal');
     var modalBtn = $('#modalBtn');
