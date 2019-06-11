@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="./assets/css/style.css">
         <script src="./assets/jquery-3.4.1.min.js"></script>
         <script src="./assets/js/frog.js"></script>
+        <script src="/assets/js/player.js"></script>
         <script src="./assets/js/board.js"></script>
         <script src="./assets/js/main.js"></script>
         <link rel="stylesheet" href="./assets/css/style.css">
@@ -48,10 +49,10 @@
         <div class="mainGameDisplay">
 
             <div class="player firstPlayer">
-                <h3>PLAYER 1</h3>
+                <h3 class="player-first">PLAYER 1</h3>
                 <div class="frogCount">
                     <h5>CAPTURED FROGS</h5>
-                    <div class="cappedFrogDisplay"></div>
+                    <div class="firstPlayerScore"></div>
                 </div>
             </div>
 
@@ -86,14 +87,21 @@
             </div>
 
             <div class="player secondPlayer">
-                <h3>PLAYER 2</h3>
+                <h3 class="player-second">PLAYER 2</h3>
                 <div class="frogCount">
                     <h5>CAPTURED FROGS</h5>
-                    <div class="cappedFrogDisplay"></div>
+                    <div class="secondPlayerScore"></div>
                 </div>
             </div>
         </div>
-
+        <div class="player-input-modal">
+            <div class="input-content">
+                <h1 class="modal-title"> </h1>
+                <input type="text" class="first-player-input" placeholder="PLAYER 1 NAME">
+                <input type="text" class="second-player-input" placeholder="PLAYER 2 NAME">
+                <button class="player-input-button"> Enter </button>
+            </div>
+        </div>
 
     </body>
 </html>
